@@ -4,12 +4,14 @@ import javax.crypto.Cipher;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 import java.nio.charset.StandardCharsets;
+
+import com.sun.org.apache.xml.internal.security.exceptions.Base64DecodingException;
 import com.sun.org.apache.xml.internal.security.utils.Base64;
 
 public class AES {
 
     private static final String key = "RJQ8XVm1UnGa6Z8pMUHoVfJHTlOJ2g04";
-    private static final String initVector = "46D2A257382DC882";
+    private static final String initVector = "46d2A257382dC882";
 
     public static String encrypt(String val) {
         try {
@@ -37,6 +39,8 @@ public class AES {
 
             byte[] decrypted = cipher.doFinal(Base64.decode(encrypted));
             return new String(decrypted);
+        } catch (Base64DecodingException e) {
+            System.out.println("Can not decrypt message!!!\nMaybe encrypted with different key.");
         } catch (Exception e) {
             e.printStackTrace();
         }
