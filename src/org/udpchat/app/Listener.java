@@ -1,7 +1,6 @@
 package org.udpchat.app;
 
 import org.udpchat.security.AES;
-
 import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.InetAddress;
@@ -13,7 +12,7 @@ class Listener implements Runnable
     private MulticastSocket socket;
     private InetAddress group;
     private int port;
-    private static final int MAX_LEN = 1000;
+    private static final int MAX_LEN = 10000;
 
     Listener(MulticastSocket socket, InetAddress group, int port)
     {
@@ -40,7 +39,7 @@ class Listener implements Runnable
                 System.exit(0);
             }
             try {
-                Thread.sleep(100);
+                Thread.sleep(250);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

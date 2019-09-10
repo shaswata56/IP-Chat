@@ -1,7 +1,5 @@
 package org.udpchat.app;
 
-import org.udpchat.security.AES;
-
 import javax.swing.*;
 import java.awt.*;
 import java.io.IOException;
@@ -9,6 +7,7 @@ import java.net.DatagramPacket;
 import java.net.InetAddress;
 import java.net.MulticastSocket;
 import java.net.SocketException;
+import org.udpchat.security.AES;
 
 public class IP_Chat extends javax.swing.JFrame {
 
@@ -33,74 +32,100 @@ public class IP_Chat extends javax.swing.JFrame {
         JButton jButton1 = new JButton();
         JLabel jLabel3 = new JLabel();
         jTextField4 = new javax.swing.JTextField();
+        JLabel jLabel4 = new JLabel();
+        jPasswordField1 = new JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel3.setBackground(new java.awt.Color(104, 107, 109));
+        jPanel3.setBackground(new java.awt.Color(89, 92, 94));
 
+        jLabel1.setFont(new java.awt.Font("Bitstream Vera Sans", Font.PLAIN, 13)); // NOI18N
         jLabel1.setText("IP");
 
+        jTextField1.setFont(new java.awt.Font("Bitstream Vera Sans", Font.PLAIN, 13)); // NOI18N
+        jTextField1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTextField1.setText("224.0.0.1");
+        jTextField1.setToolTipText("IP should be in multicast range");
         jTextField1.addActionListener(this::jTextField1ActionPerformed);
 
+        jLabel2.setFont(new java.awt.Font("Bitstream Vera Sans", Font.PLAIN, 13)); // NOI18N
         jLabel2.setText("Port");
 
+        jTextField2.setFont(new java.awt.Font("Bitstream Vera Sans", Font.PLAIN, 13)); // NOI18N
+        jTextField2.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTextField2.setText("1234");
+        jTextField2.setToolTipText("port number > 1024 are preferrable");
         jTextField2.addActionListener(this::jTextField2ActionPerformed);
 
         jTextArea1.setEditable(false);
         jTextArea1.setBackground(new java.awt.Color(0, 0, 0));
         jTextArea1.setColumns(20);
-        jTextArea1.setFont(new java.awt.Font("Monospaced", Font.PLAIN, 14));
+        jTextArea1.setFont(new java.awt.Font("Monospaced", Font.PLAIN, 14)); // NOI18N
         jTextArea1.setForeground(new java.awt.Color(74, 246, 38));
         jTextArea1.setRows(5);
+        jTextArea1.setToolTipText("Chat History");
         jScrollPane1.setViewportView(jTextArea1);
 
         jTextField3.setBackground(new java.awt.Color(0, 0, 0));
-        jTextField3.setFont(new java.awt.Font("Tahoma", Font.PLAIN, 14)); // NOI18N
+        jTextField3.setFont(new java.awt.Font("Hack", Font.PLAIN, 14)); // NOI18N
         jTextField3.setForeground(new java.awt.Color(74, 246, 38));
-        jTextField3.setText("Enter your text..");
+        jTextField3.setToolTipText("Enter your text..");
         jTextField3.addActionListener(this::jTextField3ActionPerformed);
 
         jButton1.setBackground(new java.awt.Color(104, 107, 109));
+        jButton1.setFont(new java.awt.Font("Bitstream Vera Sans", Font.PLAIN, 14)); // NOI18N
         jButton1.setText("Send");
         jButton1.addActionListener(this::jButton1ActionPerformed);
 
+        jLabel3.setFont(new java.awt.Font("Bitstream Vera Sans", Font.PLAIN, 13)); // NOI18N
         jLabel3.setText("Name");
 
+        jTextField4.setFont(new java.awt.Font("Bitstream Vera Sans", Font.PLAIN, 13)); // NOI18N
+        jTextField4.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTextField4.setText("anonymous");
+        jTextField4.setToolTipText("an unique name for join the chat");
         jTextField4.addActionListener(this::jTextField4ActionPerformed);
+
+        jLabel4.setFont(new java.awt.Font("Bitstream Vera Sans", Font.PLAIN, 13)); // NOI18N
+        jLabel4.setText("Password");
+
+        jPasswordField1.setFont(new java.awt.Font("Bitstream Vera Sans", Font.PLAIN, 13)); // NOI18N
+        jPasswordField1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jPasswordField1.setText(AES.initVector);
+        jPasswordField1.setToolTipText("length must be less than or equal 16");
+        jPasswordField1.addActionListener(this::jPasswordField1ActionPerformed);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
                 jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addContainerGap()
+                                .addGap(12, 12, 12)
                                 .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 583, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 0, Short.MAX_VALUE))
                         .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGap(11, 11, 11)
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 657, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGroup(jPanel3Layout.createSequentialGroup()
-                                                .addGap(11, 11, 11)
-                                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addGap(62, 62, 62)
-                                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                .addComponent(jLabel2)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addGap(33, 33, 33)
-                                                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                .addComponent(jLabel3)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(jTextField4))
-                                        .addGroup(jPanel3Layout.createSequentialGroup()
-                                                .addContainerGap()
-                                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 657, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addGap(0, 0, Short.MAX_VALUE)))
-                                .addContainerGap())
+                                                .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                .addComponent(jLabel4)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addContainerGap(13, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
                 jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -108,19 +133,21 @@ public class IP_Chat extends javax.swing.JFrame {
                                 .addContainerGap()
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                .addComponent(jLabel3)
+                                                .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(jLabel4)
+                                                .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 291, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jTextField3))
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 291, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addContainerGap())
         );
 
@@ -153,10 +180,22 @@ public class IP_Chat extends javax.swing.JFrame {
         msg = jTextField3.getText();
     }
 
+    private void jPasswordField1ActionPerformed(java.awt.event.ActionEvent evt) {
+        String psd = String.valueOf(jPasswordField1.getPassword());
+        int len = psd.length();
+
+        if(len < 16) {
+            AES.password = psd + AES.initVector.substring(len);
+        } else if(len > 16) {
+            AES.password = psd.substring(0,16);
+        } else {
+            AES.password = psd;
+        }
+    }
+
     private void jTextField4ActionPerformed(java.awt.event.ActionEvent evt) {
         app.name = app.jTextField4.getText();
     }
-
 
     public static void main(String[] args) {
 
@@ -178,6 +217,7 @@ public class IP_Chat extends javax.swing.JFrame {
         app.port = app.jTextField2.getText();
         app.msg = app.jTextField3.getText();
         app.name = app.jTextField4.getText();
+        AES.password = String.valueOf(app.jPasswordField1.getPassword());
 
         java.awt.EventQueue.invokeLater(() -> app.setVisible(true));
 
@@ -211,7 +251,7 @@ public class IP_Chat extends javax.swing.JFrame {
                     }
                 }
                 try {
-                    Thread.sleep(100);
+                    Thread.sleep(250);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -229,9 +269,10 @@ public class IP_Chat extends javax.swing.JFrame {
         }
     }
 
-    javax.swing.JTextArea jTextArea1;
+    private JPasswordField jPasswordField1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
+    javax.swing.JTextArea jTextArea1;
 }
