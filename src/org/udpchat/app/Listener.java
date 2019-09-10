@@ -14,8 +14,7 @@ class Listener implements Runnable
     private int port;
     private static final int MAX_LEN = 10000;
 
-    Listener(MulticastSocket socket, InetAddress group, int port)
-    {
+    Listener(MulticastSocket socket, InetAddress group, int port) {
         this.socket = socket;
         this.group = group;
         this.port = port;

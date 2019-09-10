@@ -171,15 +171,12 @@ public class IP_Chat extends javax.swing.JFrame {
     private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {
         app.port = app.jTextField2.getText();
     }
-
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {
         msg = jTextField3.getText();
     }
-
     private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {
         msg = jTextField3.getText();
     }
-
     private void jPasswordField1ActionPerformed(java.awt.event.ActionEvent evt) {
         String psd = String.valueOf(jPasswordField1.getPassword());
         int len = psd.length();
@@ -192,7 +189,6 @@ public class IP_Chat extends javax.swing.JFrame {
             AES.password = psd;
         }
     }
-
     private void jTextField4ActionPerformed(java.awt.event.ActionEvent evt) {
         app.name = app.jTextField4.getText();
     }
