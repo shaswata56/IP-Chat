@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.lang.reflect.Field;
 import java.net.DatagramPacket;
 import java.net.InetAddress;
+import java.net.URL;
 import java.net.MulticastSocket;
 import java.net.SocketException;
 import org.udpchat.security.AES;
@@ -39,8 +40,7 @@ public class IP_Chat extends javax.swing.JFrame {
         jTextField4 = new javax.swing.JTextField();
         JLabel jLabel4 = new JLabel();
         jPasswordField1 = new JPasswordField();
-        icon = new ImageIcon("encrypted.png");
-
+        
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel3.setBackground(new java.awt.Color(101, 104, 106, 229));
@@ -66,14 +66,14 @@ public class IP_Chat extends javax.swing.JFrame {
         jTextArea1.setEditable(false);
         jTextArea1.setBackground(new java.awt.Color(0, 0, 0));
         jTextArea1.setColumns(20);
-        jTextArea1.setFont(new java.awt.Font("Helvetica", Font.PLAIN, 15)); // NOI18N
+        jTextArea1.setFont(new java.awt.Font("Shonar Bangla", Font.PLAIN, 15)); // NOI18N
         jTextArea1.setForeground(new java.awt.Color(74, 246, 38));
         jTextArea1.setRows(5);
         jTextArea1.setToolTipText("Chat History");
         jScrollPane1.setViewportView(jTextArea1);
 
         jTextField3.setBackground(new java.awt.Color(0, 0, 0));
-        jTextField3.setFont(new java.awt.Font("Helvetica", Font.PLAIN, 15)); // NOI18N
+        jTextField3.setFont(new java.awt.Font("Shonar Bangla", Font.PLAIN, 15)); // NOI18N
         jTextField3.setForeground(new java.awt.Color(74, 246, 38));
         jTextField3.setToolTipText("Enter your text..");
         jTextField3.addActionListener(this::jTextField3ActionPerformed);
@@ -225,9 +225,13 @@ public class IP_Chat extends javax.swing.JFrame {
             }
         }
 
+	URL url = IP_Chat.class.getResource("/encrypted.png");
         app = new IP_Chat("IP Chat");
         app.setResizable(false);
-        app.setIconImage(Toolkit.getDefaultToolkit().getImage("encrypted.png"));
+	if (url != null) {
+		Image img = Toolkit.getDefaultToolkit().getImage(url);
+		app.setIconImage(img);
+	}
         app.ip = app.jTextField1.getText();
         app.port = app.jTextField2.getText();
         app.msg = app.jTextField3.getText();
@@ -284,6 +288,5 @@ public class IP_Chat extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
-    private static javax.swing.ImageIcon icon;
     javax.swing.JTextArea jTextArea1;
 }
