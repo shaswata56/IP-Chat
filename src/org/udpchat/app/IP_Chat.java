@@ -60,14 +60,14 @@ public class IP_Chat extends javax.swing.JFrame {
         jTextArea1.setEditable(false);
         jTextArea1.setBackground(new java.awt.Color(0, 0, 0));
         jTextArea1.setColumns(20);
-        jTextArea1.setFont(new java.awt.Font("Monospaced", Font.PLAIN, 14)); // NOI18N
+        jTextArea1.setFont(new java.awt.Font("Monospaced", Font.PLAIN, 15)); // NOI18N
         jTextArea1.setForeground(new java.awt.Color(74, 246, 38));
         jTextArea1.setRows(5);
         jTextArea1.setToolTipText("Chat History");
         jScrollPane1.setViewportView(jTextArea1);
 
         jTextField3.setBackground(new java.awt.Color(0, 0, 0));
-        jTextField3.setFont(new java.awt.Font("Hack", Font.PLAIN, 14)); // NOI18N
+        jTextField3.setFont(new java.awt.Font("Monospaced", Font.PLAIN, 16)); // NOI18N
         jTextField3.setForeground(new java.awt.Color(74, 246, 38));
         jTextField3.setToolTipText("Enter your text..");
         jTextField3.addActionListener(this::jTextField3ActionPerformed);
@@ -173,9 +173,11 @@ public class IP_Chat extends javax.swing.JFrame {
     }
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {
         msg = jTextField3.getText();
+        jTextField3.setText("");
     }
     private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {
         msg = jTextField3.getText();
+        jTextField3.setText("");
     }
     private void jPasswordField1ActionPerformed(java.awt.event.ActionEvent evt) {
         String psd = String.valueOf(jPasswordField1.getPassword());
