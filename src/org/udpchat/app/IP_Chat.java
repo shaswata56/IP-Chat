@@ -66,14 +66,14 @@ public class IP_Chat extends javax.swing.JFrame {
         jTextArea1.setEditable(false);
         jTextArea1.setBackground(new java.awt.Color(0, 0, 0));
         jTextArea1.setColumns(20);
-        jTextArea1.setFont(new java.awt.Font("Monospaced", Font.PLAIN, 15)); // NOI18N
+        jTextArea1.setFont(new java.awt.Font("Helvetica", Font.PLAIN, 15)); // NOI18N
         jTextArea1.setForeground(new java.awt.Color(74, 246, 38));
         jTextArea1.setRows(5);
         jTextArea1.setToolTipText("Chat History");
         jScrollPane1.setViewportView(jTextArea1);
 
         jTextField3.setBackground(new java.awt.Color(0, 0, 0));
-        jTextField3.setFont(new java.awt.Font("Monospaced", Font.PLAIN, 16)); // NOI18N
+        jTextField3.setFont(new java.awt.Font("Helvetica", Font.PLAIN, 15)); // NOI18N
         jTextField3.setForeground(new java.awt.Color(74, 246, 38));
         jTextField3.setToolTipText("Enter your text..");
         jTextField3.addActionListener(this::jTextField3ActionPerformed);
@@ -116,9 +116,9 @@ public class IP_Chat extends javax.swing.JFrame {
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 657, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGroup(jPanel3Layout.createSequentialGroup()
-                                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                                 .addComponent(jLabel2)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
