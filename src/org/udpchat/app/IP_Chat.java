@@ -3,6 +3,7 @@ package org.udpchat.app;
 import javax.swing.*;
 import java.awt.*;
 import java.io.IOException;
+import java.lang.reflect.Field;
 import java.net.DatagramPacket;
 import java.net.InetAddress;
 import java.net.MulticastSocket;
@@ -11,8 +12,12 @@ import org.udpchat.security.AES;
 
 public class IP_Chat extends javax.swing.JFrame {
 
-
     private IP_Chat() {
+        initComponents();
+    }
+
+    private IP_Chat(String title) {
+        super.setTitle(title);
         initComponents();
     }
 
@@ -34,10 +39,11 @@ public class IP_Chat extends javax.swing.JFrame {
         jTextField4 = new javax.swing.JTextField();
         JLabel jLabel4 = new JLabel();
         jPasswordField1 = new JPasswordField();
+        icon = new ImageIcon("encrypted.png");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel3.setBackground(new java.awt.Color(89, 92, 94));
+        jPanel3.setBackground(new java.awt.Color(101, 104, 106, 229));
 
         jLabel1.setFont(new java.awt.Font("Bitstream Vera Sans", Font.PLAIN, 13)); // NOI18N
         jLabel1.setText("IP");
@@ -208,9 +214,20 @@ public class IP_Chat extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(IP_Chat.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
 
+        if (System.getProperty("os.name").toLowerCase().contains("linux")) {
+            try {
+                Toolkit xToolkit = Toolkit.getDefaultToolkit();
+                Field awtAppClassNameField = xToolkit.getClass().getDeclaredField("awtAppClassName");
+                awtAppClassNameField.setAccessible(true);
+                awtAppClassNameField.set(xToolkit, "IP Chat");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
 
-        app = new IP_Chat();
+        app = new IP_Chat("IP Chat");
         app.setResizable(false);
+        app.setIconImage(Toolkit.getDefaultToolkit().getImage("encrypted.png"));
         app.ip = app.jTextField1.getText();
         app.port = app.jTextField2.getText();
         app.msg = app.jTextField3.getText();
@@ -219,8 +236,7 @@ public class IP_Chat extends javax.swing.JFrame {
 
         java.awt.EventQueue.invokeLater(() -> app.setVisible(true));
 
-        try
-        {
+        try {
             InetAddress group = InetAddress.getByName(app.ip);
             MulticastSocket socket = new MulticastSocket(Integer.parseInt(app.port));
             socket.setTimeToLive(255);
@@ -229,23 +245,19 @@ public class IP_Chat extends javax.swing.JFrame {
             t.start();
             while(true)
             {
-                if(app.msg.equalsIgnoreCase("Exit"))
-                {
-                    socket.leaveGroup(group);
-                    socket.close();
-                    t.interrupt();
-                    break;
-                }
-                if(!app.msg.equals("")) {
-                    if(app.msg.equals("Enter your text..")) {
-                        app.msg = "";
-                    } else {
-                        app.msg = AES.encrypt(app.name + ": " + app.msg + "\n");
-                        assert app.msg != null;
-                        byte[] buffer = app.msg.getBytes();
-                        DatagramPacket datagrampacket = new DatagramPacket(buffer,buffer.length,group,Integer.parseInt(app.port));
-                        socket.send(datagrampacket);
-                        app.msg = "";
+                if(!app.msg.trim().equals("")) {
+                    boolean exit = app.msg.equalsIgnoreCase("Exit");
+                    app.msg = AES.encrypt(app.name.trim() + ": " + app.msg.trim() + "\n");
+                    assert app.msg != null;
+                    byte[] buffer = app.msg.getBytes();
+                    DatagramPacket datagrampacket = new DatagramPacket(buffer,buffer.length,group,Integer.parseInt(app.port));
+                    socket.send(datagrampacket);
+                    app.msg = "";
+                    if (exit) {
+                        socket.leaveGroup(group);
+                        socket.close();
+                        t.interrupt();
+                        break;
                     }
                 }
                 try {
@@ -272,5 +284,6 @@ public class IP_Chat extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
+    private static javax.swing.ImageIcon icon;
     javax.swing.JTextArea jTextArea1;
 }
