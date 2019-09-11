@@ -225,13 +225,13 @@ public class IP_Chat extends javax.swing.JFrame {
             }
         }
 
-	URL url = IP_Chat.class.getResource("/encrypted.png");
+	    URL url = IP_Chat.class.getResource("/encrypted.png");
         app = new IP_Chat("IP Chat");
         app.setResizable(false);
-	if (url != null) {
-		Image img = Toolkit.getDefaultToolkit().getImage(url);
-		app.setIconImage(img);
-	}
+        if (url != null) {
+            Image img = Toolkit.getDefaultToolkit().getImage(url);
+            app.setIconImage(img);
+        }
         app.ip = app.jTextField1.getText();
         app.port = app.jTextField2.getText();
         app.msg = app.jTextField3.getText();
@@ -265,6 +265,7 @@ public class IP_Chat extends javax.swing.JFrame {
                     }
                 }
                 try {
+                    System.gc();
                     Thread.sleep(250);
                 } catch (InterruptedException e) {
                     e.printStackTrace();

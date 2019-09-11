@@ -26,7 +26,7 @@ class Listener implements Runnable
         while(true)
         {
             byte[] buffer = new byte[Listener.MAX_LEN];
-            DatagramPacket datagrampacket = new DatagramPacket(buffer,buffer.length, group, port);
+            DatagramPacket datagrampacket = new DatagramPacket(buffer, buffer.length, group, port);
             try
             {
                 socket.receive(datagrampacket);
@@ -38,6 +38,7 @@ class Listener implements Runnable
                 System.exit(0);
             }
             try {
+                System.gc();
                 Thread.sleep(250);
             } catch (InterruptedException e) {
                 e.printStackTrace();
