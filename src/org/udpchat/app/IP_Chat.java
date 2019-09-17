@@ -13,10 +13,6 @@ import org.udpchat.security.AES;
 
 public class IP_Chat extends javax.swing.JFrame {
 
-    private IP_Chat() {
-        initComponents();
-    }
-
     private IP_Chat(String title) {
         super.setTitle(title);
         initComponents();
@@ -173,9 +169,13 @@ public class IP_Chat extends javax.swing.JFrame {
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {
         app.ip = app.jTextField1.getText();
+        if(app.ip.trim().equals(""))
+            app.ip = "224.0.0.1";
     }
     private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {
         app.port = app.jTextField2.getText();
+        if(app.port.trim().equals(""))
+            app.port = "1234";
     }
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {
         msg = jTextField3.getText();
@@ -253,7 +253,6 @@ public class IP_Chat extends javax.swing.JFrame {
                     boolean exit = app.msg.equalsIgnoreCase("Exit");
                     String msg = app.name.trim() + ": " + app.msg.trim() + "\n";
                     app.msg = AES.encrypt(msg);
-                    System.out.println(app.msg);
                     assert app.msg != null;
                     byte[] buffer = app.msg.getBytes();
                     DatagramPacket datagrampacket = new DatagramPacket(buffer,buffer.length,group,Integer.parseInt(app.port));

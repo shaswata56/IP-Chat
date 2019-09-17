@@ -31,12 +31,11 @@ class Listener implements Runnable
                 socket.receive(datagrampacket);
                 String message = new String(buffer, 0, datagrampacket.getLength(), StandardCharsets.UTF_8);
                 IP_Chat.app.jTextArea1.append(AES.decrypt(message));
-                System.out.println(AES.decrypt(message));
             } catch(IOException e) {
                 System.exit(0);
             }
             try {
-                Thread.sleep(100);
+                Thread.sleep(5);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

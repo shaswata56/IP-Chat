@@ -1,9 +1,15 @@
 package org.udpchat.security;
 
+import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 import java.nio.charset.StandardCharsets;
+import java.security.InvalidAlgorithmParameterException;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
 import java.util.Base64;
 import java.lang.IllegalArgumentException;
 
@@ -39,10 +45,8 @@ public class AES {
 
             byte[] decrypted = cipher.doFinal(Base64.getDecoder().decode(encrypted));
             return new String(decrypted);
-        } catch (IllegalArgumentException e) {
+        } catch (IllegalArgumentException | NoSuchAlgorithmException | NoSuchPaddingException | InvalidKeyException | InvalidAlgorithmParameterException | IllegalBlockSizeException | BadPaddingException e) {
             System.out.println("Can not decrypt message!!!\nMaybe encrypted with different key.");
-        } catch (Exception e) {
-            e.printStackTrace();
         }
         return null;
     }
