@@ -94,7 +94,7 @@ public class IP_Chat extends javax.swing.JFrame {
         jPasswordField1.setFont(new java.awt.Font("Bitstream Vera Sans", Font.PLAIN, 13)); // NOI18N
         jPasswordField1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jPasswordField1.setText(AES.key);
-        jPasswordField1.setToolTipText("length must be less than or equal 16");
+        jPasswordField1.setToolTipText("length must be less than or equal 32");
         jPasswordField1.addActionListener(this::jPasswordField1ActionPerformed);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
