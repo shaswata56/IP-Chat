@@ -9,14 +9,14 @@ import java.lang.IllegalArgumentException;
 
 public class AES {
 
-    private static final String key = "RJQ8XVm1UnGa6Z8pMUHoVfJHTlOJ2g04";
-    public static final String initVector = "46d2A257382dC882";
+    public static final String key = "RJQ8XVm1UnGa6Z8pMUHoVfJHTlOJ2g04";
+    private static final String initVector = "46d2A257382dC882";
     public static String password;
 
     public static String encrypt(String val) {
         try {
-            IvParameterSpec iv = new IvParameterSpec(password.getBytes(StandardCharsets.UTF_8));
-            SecretKeySpec secretKey = new SecretKeySpec(key.getBytes(StandardCharsets.UTF_8), "AES");
+            IvParameterSpec iv = new IvParameterSpec(initVector.getBytes(StandardCharsets.UTF_8));
+            SecretKeySpec secretKey = new SecretKeySpec(password.getBytes(StandardCharsets.UTF_8), "AES");
 
             Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5PADDING");
             cipher.init(Cipher.ENCRYPT_MODE, secretKey, iv);
@@ -31,8 +31,8 @@ public class AES {
 
     public static String decrypt(String encrypted) {
         try {
-            IvParameterSpec iv = new IvParameterSpec(password.getBytes(StandardCharsets.UTF_8));
-            SecretKeySpec secretKey = new SecretKeySpec(key.getBytes(StandardCharsets.UTF_8), "AES");
+            IvParameterSpec iv = new IvParameterSpec(initVector.getBytes(StandardCharsets.UTF_8));
+            SecretKeySpec secretKey = new SecretKeySpec(password.getBytes(StandardCharsets.UTF_8), "AES");
 
             Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5PADDING");
             cipher.init(Cipher.DECRYPT_MODE, secretKey, iv);

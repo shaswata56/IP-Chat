@@ -27,19 +27,16 @@ class Listener implements Runnable
         {
             byte[] buffer = new byte[Listener.MAX_LEN];
             DatagramPacket datagrampacket = new DatagramPacket(buffer, buffer.length, group, port);
-            try
-            {
+            try {
                 socket.receive(datagrampacket);
                 String message = new String(buffer, 0, datagrampacket.getLength(), StandardCharsets.UTF_8);
                 IP_Chat.app.jTextArea1.append(AES.decrypt(message));
-            }
-            catch(IOException e)
-            {
+                System.out.println(AES.decrypt(message));
+            } catch(IOException e) {
                 System.exit(0);
             }
             try {
-                System.gc();
-                Thread.sleep(250);
+                Thread.sleep(100);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

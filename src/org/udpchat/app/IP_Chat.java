@@ -97,7 +97,7 @@ public class IP_Chat extends javax.swing.JFrame {
 
         jPasswordField1.setFont(new java.awt.Font("Bitstream Vera Sans", Font.PLAIN, 13)); // NOI18N
         jPasswordField1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jPasswordField1.setText(AES.initVector);
+        jPasswordField1.setText(AES.key);
         jPasswordField1.setToolTipText("length must be less than or equal 16");
         jPasswordField1.addActionListener(this::jPasswordField1ActionPerformed);
 
@@ -189,10 +189,10 @@ public class IP_Chat extends javax.swing.JFrame {
         String psd = String.valueOf(jPasswordField1.getPassword());
         int len = psd.length();
 
-        if(len < 16) {
-            AES.password = psd + AES.initVector.substring(len);
-        } else if(len > 16) {
-            AES.password = psd.substring(0,16);
+        if(len < 32) {
+            AES.password = psd + AES.key.substring(len);
+        } else if(len > 32) {
+            AES.password = psd.substring(0,32);
         } else {
             AES.password = psd;
         }
@@ -251,7 +251,9 @@ public class IP_Chat extends javax.swing.JFrame {
             {
                 if(!app.msg.trim().equals("")) {
                     boolean exit = app.msg.equalsIgnoreCase("Exit");
-                    app.msg = AES.encrypt(app.name.trim() + ": " + app.msg.trim() + "\n");
+                    String msg = app.name.trim() + ": " + app.msg.trim() + "\n";
+                    app.msg = AES.encrypt(msg);
+                    System.out.println(app.msg);
                     assert app.msg != null;
                     byte[] buffer = app.msg.getBytes();
                     DatagramPacket datagrampacket = new DatagramPacket(buffer,buffer.length,group,Integer.parseInt(app.port));
@@ -265,8 +267,7 @@ public class IP_Chat extends javax.swing.JFrame {
                     }
                 }
                 try {
-                    System.gc();
-                    Thread.sleep(250);
+                    Thread.sleep(100);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
